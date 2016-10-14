@@ -2,7 +2,7 @@
   "name": "jobfinder",
   "version": "1.0.0",
   "description": "a simple jobs classified site",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,7 @@
     "jade": "^1.11.0"
   },
   "devDependencies": {
+    "browser-sync": "^2.17.3",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.1",
     "gulp-nodemon": "^2.2.1",

@@ -1,7 +1,7 @@
 angular.module('app', [])
-    .controller('testController', function () {
+    .controller('testController', function ($scope) {
 
-        this.jobs = [
+        $scope.jobs = [
             {
                 title: "brewry Nigeria Ltd Manager",
                 description: "While not always necessary, sometimes you need to put your DOM in a box. For those situations, try the panel component."
@@ -12,6 +12,7 @@ angular.module('app', [])
             }
         ]
 
+        console.log("hello world from murphy")
 
 
     })

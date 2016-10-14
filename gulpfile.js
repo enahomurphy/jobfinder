@@ -3,11 +3,10 @@ var jshint = require('gulp-jshint');
 var nodemon = require('gulp-nodemon');
 var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
-
 var jsFiles = ['*.js', 'app/assets/**/*.js'];
 
 gulp.task('lint', function() {
-    gulp.src(jsFiles)
+    return gulp.src(jsFiles)
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish', {
             verbose: true,
@@ -19,7 +18,7 @@ gulp.task('inject', function() {
 
     var injectSrc = gulp.src(['./app/public/assets/css/*.css', './app/public/assets/js/*.js'], 
                                 {read : false})
-    gulp.src('./app/views/index.jade')
+    return gulp.src('./app/views/index.jade')
         .pipe(wiredep({
             'bowerJson': require('./bower.json'),
             'directory': './app/public/bower_components',
@@ -34,15 +33,16 @@ gulp.task('inject', function() {
 });
 
 
-
 gulp.task('serve',['lint', 'inject'], function() {
     nodemon({
-        scripts: 'app.js',
+        scripts: 'server.js',
         delayTime: 1,
         env: {
-            'PORT': 5000
+            "PORT": 8080
         }
     }).on('restart', function(e) {
         console.log('restarting....');
     });
 });
+
+gulp.watch(['./app/assets/**/*.js', 'server.js'], ['serve'])

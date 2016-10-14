@@ -22,16 +22,18 @@ html
 
 
     body(ng-app="app")
-        div(ng-controller="testController")
-        .list-group(ng-reapet="jobs as job")
-            a.link.list-group-item.active(href="#")
-                h4.list-group-item-heading  {{ job.title}}
-                p.list-group-item-test {{ job.description }}
+        .controller(ng-controller="testController")
+            .row
+                .col-md-6.col-md-offset-3
+                    h2.text-center Find Jobs Close To You
+                    .search-job
+                        form
+                            input.form-control(type="text" placeholde="Find jobs")
+                    .list-group
+                        a.link.list-group-item(href="#" ng-repeat="job in jobs")
+                            h4.list-group-item-heading  {{ job.title }}
+                            p.list-group-item-test {{ job.description }}
 
 
         
 
-.list-group
-    a.list-group-item.active(href='#')
-        h4.list-group-item-heading
-        p.list-group-item-text ...
