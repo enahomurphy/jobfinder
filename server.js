@@ -9,13 +9,14 @@ var app = express();
 
 
 // mongoose connection
-mongoose.connect('mongodb://localhost/jobfinder')
+// mongoose.connect('mongodb://localhost/jobfinder')
+mongoose.connect('mongodb://jobfinder:federals@ds057816.mlab.com:57816/jobfinder')
 var con = mongoose.connection;
 con.on('open', function() {
     console.log("whala mongoose has connected");
     jobs.seedJobs();
-
 });
+
 
 
 //setting up static files
