@@ -17,15 +17,18 @@ gulp.task('lint', function() {
 
 gulp.task('inject', function() {
 
-    var injectSrc = gulp.src(['./app/public/assets/css/*.css', './app/public/assets/js/*.js'], {read : false});
-
+    var injectSrc = gulp.src(['./app/public/assets/css/*.css', './app/public/assets/js/*.js'], 
+                                {read : false})
     gulp.src('./app/views/index.jade')
         .pipe(wiredep({
             'bowerJson': require('./bower.json'),
-            'directory': './app/public/bower_components'
+            'directory': './app/public/bower_components',
+            'ignorePath': '../public'
         }))
         .pipe(inject(injectSrc, {
-            ignorePath: '/public'
+            ignorePath: 'app/public',                                                                   
+            addRootSlash: true,                                                                    
+            relative: false
         }))
         .pipe(gulp.dest('./app/views'));
 });
