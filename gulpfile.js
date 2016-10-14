@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
-var nodemon = require('gulp-nodemon')
+var nodemon = require('gulp-nodemon');
 var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
 
-var jsFiles = ['*.js', 'app/**/*.js'];
+var jsFiles = ['*.js', 'app/assets/**/*.js'];
 
 gulp.task('lint', function() {
     gulp.src(jsFiles)
@@ -17,7 +17,7 @@ gulp.task('lint', function() {
 
 gulp.task('inject', function() {
 
-    var injectSrc = gulp.src(['./app/public/assets/css/*.css', './app/public/assets/js/*.js'], {read : false})
+    var injectSrc = gulp.src(['./app/public/assets/css/*.css', './app/public/assets/js/*.js'], {read : false});
 
     gulp.src('./app/views/index.jade')
         .pipe(wiredep({
@@ -32,7 +32,7 @@ gulp.task('inject', function() {
 
 
 
-gulp.task('serve', function() {
+gulp.task('serve',['lint', 'inject'], function() {
     nodemon({
         scripts: 'app.js',
         delayTime: 1,
