@@ -17,10 +17,11 @@
   "dependencies": {
     "angular": "^1.5.8",
     "jquery": "^3.1.1",
-    "bootstrap": "boostrap#^3.3.7"
+    "bootstrap": "boostrap#^3.3.7",
+    "angular-resource": "^1.5.8"
   },
   "overrides": {
-    "bootstrap":{
+    "bootstrap": {
       "main": [
         "less/bootstrap.less",
         "dist/js/bootstrap.js",
