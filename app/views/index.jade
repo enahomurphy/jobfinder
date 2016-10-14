@@ -1,12 +1,38 @@
 html
-    link(type='text/css' rel='stylesheet' href='')
-    title jobs finder
-    
-    body
-        h1 hello world
+    head 
+        title jobs finder
+      
+        //- bower:css
+        link(rel='stylesheet', href='../public/bower_components/bootstrap/dist/css/bootstrap.min.css')
+        //- endbower:css
+
+        //- bower:js
+        script(src='../public/bower_components/angular/angular.js')
+        script(src='../public/bower_components/jquery/dist/jquery.js')
+        script(src='../public/bower_components/bootstrap/dist/js/bootstrap.js')
+        //- endbower:js
+        
+        //- inject:css
+        link(rel="stylesheet", href="/app/public/assets/css/style.css")
+        //- endinject
+
+        //- inject:js
+        script(src="/app/public/assets/js/app.js")
+        //- endinject
+
+
+    body(ng-app="app")
+        div(ng-controller="testController")
+        .list-group(ng-reapet="jobs as job")
+            link(href="#" class="list-group-item active")
+                h4.list-group-item-heading  {{ job.title}}
+                p.list-group-item-test {{ job.description }}
+
+
+        
         <div class="list-group">
   <a href="#" class="list-group-item active">
-    <h4 class="list-group-item-heading">List group item heading</h4>
+    <h4 class="list-group-item-heading"></h4>
     <p class="list-group-item-text">...</p>
   </a>
 </div>
