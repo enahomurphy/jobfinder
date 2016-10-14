@@ -1,0 +1,17 @@
+{
+  "name": "jobfinder",
+  "description": "a simple jobs classified site",
+  "main": "index.js",
+  "authors": [
+    "enaho murphy <enahomurphy@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
