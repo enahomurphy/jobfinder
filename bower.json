@@ -13,5 +13,31 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "jquery": "^3.1.1",
+    "bootstrap": "boostrap#^3.3.7"
+  },
+  "overrides": {
+    "bootstrap":{
+      "main": [
+        "less/bootstrap.less",
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.min.css"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "less/font-awesome.less",
+        "scss/font-awesome.scss",
+        "css/font-awesome.css"
+      ]
+    }
+  },
+  "angular": {
+    "main": [
+      "./angular.js"
+    ]
+  }
 }

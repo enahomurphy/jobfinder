@@ -1,6 +1,9 @@
-const gulp = require('gulp');
-const jshint = require('gulp-jshint');
-const nodemon = require('gulp-nodemon')
+var gulp = require('gulp');
+var jshint = require('gulp-jshint');
+var nodemon = require('gulp-nodemon')
+var wiredep = require('wiredep').stream;
+var inject = require('gulp-inject');
+
 var jsFiles = ['*.js', 'app/**/*.js'];
 
 gulp.task('lint', function() {
@@ -11,6 +14,23 @@ gulp.task('lint', function() {
             beep: true
         }));
 });
+
+gulp.task('inject', function() {
+
+    var injectSrc = gulp.src(['./app/public/assets/css/*.css', './app/public/assets/js/*.js'], {read : false})
+
+    gulp.src('./app/views/index.jade')
+        .pipe(wiredep({
+            'bowerJson': require('./bower.json'),
+            'directory': './app/public/bower_components'
+        }))
+        .pipe(inject(injectSrc, {
+            ignorePath: '/public'
+        }))
+        .pipe(gulp.dest('./app/views'));
+});
+
+
 
 gulp.task('serve', function() {
     nodemon({
