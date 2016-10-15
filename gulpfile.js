@@ -5,7 +5,7 @@ var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
 var mocha = require('gulp-mocha');
 
-var jsFiles = ['*.js', 'app/assets/**/*.js', './test/**/*.js'];
+var jsFiles = ['*.js', 'app/**/*.js', './test/**/*.js'];
 
 gulp.task('test', function () {
     return gulp.src('test/*.js', {read: false})

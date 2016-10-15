@@ -1,14 +1,7 @@
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
-var jobModel = require('../app/models/Job');
+var jobModel = require('../app/helpers/jobs.data.js');
 var Promise = require('bluebird');
-
-
-mongoose.Promise = Promise;
-var connectDb = Promise.promisify(mongoose.connect, {
-    context: mongoose
-});
-
 
 function resetJobs() {
     return new Promise(function (resolve, reject) {
@@ -16,20 +9,10 @@ function resetJobs() {
     });
 }
 
-//  connectDb('mongodb://127.0.0.1/jobfinder')
-//     .then(resetJobs())
-//     .then(jobModel.seedJobs)
-//     .then(jobModel.allJobs)
-//     .then(function(job){
-//         console.log(job)l
-//     })
-
-
-
 describe('get jobs', function () {
     var jobs;
     before(function (done) {
-        connectDb('mongodb://localhost/jobfinder')
+        jobModel.connectDb('mongodb://localhost/jobfinder')
             .then(resetJobs())
             .then(jobModel.seedJobs)
             .then(jobModel.allJobs)
