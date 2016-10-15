@@ -4,6 +4,14 @@ var nodemon = require('gulp-nodemon');
 var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
 var jsFiles = ['*.js', 'app/assets/**/*.js'];
+var mocha = require('gulp-mocha')
+
+
+
+gulp.task('test', function () {
+    gulp.src('test/*.js', {read: false})
+        .pipe(mocha({reporter: 'nyan' }))
+})
 
 gulp.task('lint', function() {
     return gulp.src(jsFiles)
@@ -32,8 +40,7 @@ gulp.task('inject', function() {
         .pipe(gulp.dest('./app/views'));
 });
 
-
-gulp.task('serve',['lint', 'inject'], function() {
+gulp.task('serve',['lint', 'inject', 'test'], function() {
     nodemon({
         scripts: 'server.js',
         delayTime: 1,
@@ -45,4 +52,4 @@ gulp.task('serve',['lint', 'inject'], function() {
     });
 });
 
-gulp.watch(['./app/assets/**/*.js', 'server.js'], ['serve'])
+gulp.watch(['./app/assets/**/*.js', './test/*.js', 'server.js'], ['serve'])
