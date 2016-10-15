@@ -1,7 +1,7 @@
 {
   "name": "jobfinder",
   "description": "a simple jobs classified site",
-  "main": "app.js",
+  "main": "server.js",
   "authors": [
     "enaho murphy <enahomurphy@gmail.com>"
   ],
