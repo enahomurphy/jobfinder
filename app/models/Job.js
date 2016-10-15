@@ -13,8 +13,7 @@ var jobSchema = mongoose.Schema({
 
 var job = mongoose.model('Job', jobSchema)
 
-exports.seedJobs = function () {
-
+exports.seedJobs = function (callback) {
     job.find({}).exec(function (err, jobs) {
         if (jobs.length === 0) {
             job.create({
@@ -33,7 +32,7 @@ exports.seedJobs = function () {
             job.create({
                 title: "Head of Industrial Projects",
                 description: "Bradfield Consulting Limited - Our client is a major player in international freight forwarding business and they wish to fill this position with a suitable candidate   Overall Role.."
-            })
+            }, callback)
         }
     })
 

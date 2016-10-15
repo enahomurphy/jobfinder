@@ -4,14 +4,14 @@ var nodemon = require('gulp-nodemon');
 var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
 var jsFiles = ['*.js', 'app/assets/**/*.js'];
-var mocha = require('gulp-mocha')
+var mocha = require('gulp-mocha');
 
 
 
 gulp.task('test', function () {
-    gulp.src('test/*.js', {read: false})
-        .pipe(mocha({reporter: 'nyan' }))
-})
+    return gulp.src('test/*.js', {read: false})
+        .pipe(mocha({reporter: 'nyan' }));
+});
 
 gulp.task('lint', function() {
     return gulp.src(jsFiles)
@@ -25,7 +25,7 @@ gulp.task('lint', function() {
 gulp.task('inject', function() {
 
     var injectSrc = gulp.src(['./app/public/assets/css/*.css', './app/public/assets/js/*.js'], 
-                                {read : false})
+                                {read : false});
     return gulp.src('./app/views/index.jade')
         .pipe(wiredep({
             'bowerJson': require('./bower.json'),
@@ -40,16 +40,15 @@ gulp.task('inject', function() {
         .pipe(gulp.dest('./app/views'));
 });
 
-gulp.task('serve',['lint', 'inject', 'test'], function() {
+gulp.task('serve', function() {
     nodemon({
         scripts: 'server.js',
         delayTime: 1,
-        env: {
-            "PORT": 8080
-        }
+        tasks: ['lint', 'inject', 'test'],
+        env: { 'NODE_ENV': 8080 }
     }).on('restart', function(e) {
         console.log('restarting....');
     });
 });
 
-gulp.watch(['./app/assets/**/*.js', './test/*.js', 'server.js'], ['serve'])
+gulp.watch(['./app/assets/**/*.js', './test/*.js', 'server.js'], ['serve', 'test']);

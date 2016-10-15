@@ -1,17 +1,27 @@
 var expect = require('chai').expect
 var mongoose = require('mongoose')
-var jobs = require('../app/models/Job')
+var jobModel = require('../app/models/Job')
+
+mongoose.connect('mongodb://localhost/jobfinder')
 
 
 
-describe('get jobs', function() {
+function resetJobs(callback) {
+    mongoose.connection.collections['jobs'].drop(callback)
+}
 
-    it('shuold should always return a job since jobs are seeded', function () {
-        mongoose.model('job').find({}).exec(function(err, collection) {
-            expect(collection).to.be.at.least(1)
+describe('get jobs', function () {
+
+    it('shuold should always return a job since jobs are seeded', function (done) {
+        resetJobs(function () {
+            jobModel.seedJobs(function () {
+                mongoose.model('Job').find({}).exec(function (err, jobList) {
+                    expect(jobList).to.have.length.of.at.least(2)
+                    console.log(jobList.length, "hello")
+                    done()
+                    console
+                })
+            })
         })
-
     })
-
-
 })
