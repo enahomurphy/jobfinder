@@ -12,20 +12,48 @@ var connectDb = Promise.promisify(mongoose.connect, {
 
 function resetJobs() {
     return new Promise(function (resolve, reject) {
-        mongoose.connection.collections['jobs'].drop(resolve, reject)
-    })
+        mongoose.connection.collections.jobs.drop(resolve, reject);
+    });
 }
 
+//  connectDb('mongodb://127.0.0.1/jobfinder')
+//     .then(resetJobs())
+//     .then(jobModel.seedJobs)
+//     .then(jobModel.allJobs)
+//     .then(function(job){
+//         console.log(job)l
+//     })
+
+
+
 describe('get jobs', function () {
-    it('shuold should always return a job since jobs are seeded', function (done) {
+    var jobs;
+    before(function (done) {
         connectDb('mongodb://localhost/jobfinder')
             .then(resetJobs())
             .then(jobModel.seedJobs)
             .then(jobModel.allJobs)
-            .then(function (jobList) {
-                console.log(jobList)
-                expect(jobList.length).to.be.at.least(1)
-                done()
-            })
-    })
-})
+            .then(function (collections) {
+                jobs = collections;
+                done();
+            });
+    });
+
+
+    it('should  always return a job since jobs are seeded', function () {
+        expect(jobs.length).to.be.at.least(1);
+    });
+
+    it('should have jobs with title', function () {
+        expect(jobs[0].title).to.not.be.empty;
+    });
+
+    it('should have jobs with description', function () {
+        expect(jobs[0].description).to.not.be.empty;
+    });
+
+    after(function (done) {
+        resetJobs();
+        done();
+    });
+});

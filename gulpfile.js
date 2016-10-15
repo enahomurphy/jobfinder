@@ -3,10 +3,9 @@ var jshint = require('gulp-jshint');
 var nodemon = require('gulp-nodemon');
 var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
-var jsFiles = ['*.js', 'app/assets/**/*.js'];
 var mocha = require('gulp-mocha');
 
-
+var jsFiles = ['*.js', 'app/assets/**/*.js', './test/**/*.js'];
 
 gulp.task('test', function () {
     return gulp.src('test/*.js', {read: false})
@@ -45,7 +44,7 @@ gulp.task('serve', function() {
         scripts: 'server.js',
         delayTime: 1,
         tasks: ['lint', 'inject', 'test'],
-        env: { 'NODE_ENV': 8080 }
+        env: { 'env': 8080 }
     }).on('restart', function(e) {
         console.log('restarting....');
     });
