@@ -43,8 +43,7 @@ gulp.task('serve', function() {
     nodemon({
         scripts: 'server.js',
         delayTime: 1,
-        tasks: ['lint', 'inject', 'test'],
-        env: { 'env': 8080 }
+        tasks: ['lint', 'inject', 'test']
     }).on('restart', function(e) {
         console.log('restarting....');
     });
